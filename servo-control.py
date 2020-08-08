@@ -13,6 +13,7 @@ while (count < 9):
     if (angle > 149):
             angle = 0
     else:
+            print(angle)
             kit.servo[0].angle = angle 
             angle = angle + 1
-            time.sleep(1)
+            time.sleep(.05)
