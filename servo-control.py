@@ -7,7 +7,6 @@ from adafruit_servokit import ServoKit
 # 8 for FeatherWing, 16 for Shield/HAT/Bonnet.
 kit = ServoKit(channels=16)
 
-
 count = 0
 angle = 0
 while (count < 9):
