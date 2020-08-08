@@ -11,18 +11,19 @@ logging.basicConfig(level=logging.INFO)
 # 8 for FeatherWing, 16 for Shield/HAT/Bonnet.
 # kit = ServoKit(channels=16)
 
-count = 0
-angle = 0
-while count < 9:
-    if angle > 149:
-        angle = 0
-    else:
-        # print(angle)
-        # kit.servo[0].angle = angle
-        angle = angle + 1
-        time.sleep(.05)
 
 print("running")
+
+# count = 0
+# angle = 0
+# while count < 9:
+#     if angle > 149:
+#         angle = 0
+#     else:
+#         # print(angle)
+#         # kit.servo[0].angle = angle
+#         angle = angle + 1
+#         time.sleep(.05)
 
 
 async def hello(websocket, path):
