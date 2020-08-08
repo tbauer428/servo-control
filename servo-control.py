@@ -14,5 +14,4 @@ while (count < 9):
             angle = 0
     else:
             kit.servo[0].angle = angle + 1  
-    time.sleep(1)
-    pass
+            time.sleep(1)
