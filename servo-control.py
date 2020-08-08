@@ -22,6 +22,8 @@ while count < 9:
         angle = angle + 1
         time.sleep(.05)
 
+print("running")
+
 
 async def hello(websocket, path):
     name = await websocket.recv()
@@ -31,6 +33,7 @@ async def hello(websocket, path):
 
     await websocket.send(greeting)
     print(f"> {greeting}")
+
 
 start_server = websockets.serve(hello, "localhost", 8765)
 
