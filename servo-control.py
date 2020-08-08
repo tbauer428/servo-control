@@ -9,10 +9,11 @@ kit = ServoKit(channels=16)
 
 
 count = 0
+angle = 0
 while (count < 9):
-    kit.servo[0].angle = 150
+    if (angle > 149):
+            angle = 0
+    else:
+            kit.servo[0].angle = angle + 1  
     time.sleep(1)
-    kit.servo[0].angle = 0
-    time.sleep(1)
-    kit.servo[0].angle = 90
     pass
