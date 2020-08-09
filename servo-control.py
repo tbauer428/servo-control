@@ -1,37 +1,49 @@
-"""Simple test for a standard servo on channel 0 and a continuous rotation servo on channel 1."""
 import time
-# from adafruit_servokit import ServoKit
+from adafruit_servokit import ServoKit
 import asyncio
 import logging
 import websockets
 
 logging.basicConfig(level=logging.INFO)
 
-# Set channels to the number of servo channels on your kit.
-# 8 for FeatherWing, 16 for Shield/HAT/Bonnet.
-# kit = ServoKit(channels=16)
+kit = ServoKit(channels=16)
 
 
-print("running")
+async def send_message(websocket, message):
+    await websocket.send(message)
+    print("Sent: " + message)
 
-# count = 0
-# angle = 0
-# while count < 9:
-#     if angle > 149:
-#         angle = 0
-#     else:
-#         # print(angle)
-#         # kit.servo[0].angle = angle
-#         angle = angle + 1
-#         time.sleep(.05)
+
+angle = 0
+maximum_servo_angle = 150
+minimum_servo_angle = 0
 
 
 async def handler(websocket, path):
+    global angle
+    global kit
     async for message in websocket:
-        print(message)
+        print("Received: " + message)
+        if message == "ROTATE_RIGHT":
+            if angle == maximum_servo_angle:
+                print(angle)
+                pass
+            else:
+                angle += 1
+                kit.servo[0].angle = angle
+                print(angle)
+        elif message == "ROTATE_LEFT":
+            if angle == minimum_servo_angle:
+                print(angle)
+                pass
+            else:
+                angle -= 1
+                kit.servo[0].angle = angle
+                print(angle)
 
+start_server = websockets.serve(handler, "192.168.1.54", 8080)
 
-start_server = websockets.serve(handler, "192.168.1.56", 8080)
+print("servo-control.py is running")
 
 asyncio.get_event_loop().run_until_complete(start_server)
 asyncio.get_event_loop().run_forever()
